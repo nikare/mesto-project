@@ -1,0 +1,16 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+  min-height: 100vh;
+  color: white;
+  background: black;
+  font-family: 'Inter', 'Arial', sans-serif;
+  padding: 0 45px;
+  box-sizing: border-box;
+  /* font smoothing */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+}

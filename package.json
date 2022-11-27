@@ -1,0 +1,15 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "Проект: Mesto (Яндекс Практикум)",
+  "repository": "https://github.com/nikare/mesto-project",
+  "homepage": "https://nikare.github.io/mesto-project",
+  "author": "Nikolay Karetskiy <lynxloner@icloud.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "live-server . --port=1234 --host=localhost"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
