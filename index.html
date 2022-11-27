@@ -19,16 +19,17 @@
             <img class="profile__image" src="./images/avatar.png" alt="Аватар" />
           </div>
           <div class="profile__info">
-            <h1 class="profile__name">
-              <span class="profile__name-text">Жак-Ив Кусто</span>
+            <div class="profile__name">
+              <h1 class="profile__name-text">Жак-Ив Кусто</h1>
               <button
                 class="profile__edit button"
+                type="button"
                 onclick="document.querySelector('.modal').classList.add('modal_active');"
               ></button>
-            </h1>
+            </div>
             <p class="profile__text">Исследователь океана</p>
           </div>
-          <button class="profile__add button"></button>
+          <button class="profile__add button" type="button"></button>
         </section>
 
         <section class="cards">
@@ -39,6 +40,7 @@
                 <h2 class="card__title">Карачаевск</h2>
                 <button
                   class="card__like button"
+                  type="button"
                   onclick="this.classList.toggle('card__like_active');"
                 ></button>
               </div>
@@ -49,6 +51,7 @@
                 <h2 class="card__title">Гора Эльбрус</h2>
                 <button
                   class="card__like button"
+                  type="button"
                   onclick="this.classList.toggle('card__like_active');"
                 ></button>
               </div>
@@ -59,6 +62,7 @@
                 <h2 class="card__title">Домбай</h2>
                 <button
                   class="card__like button"
+                  type="button"
                   onclick="this.classList.toggle('card__like_active');"
                 ></button>
               </div>
@@ -69,6 +73,7 @@
                 <h2 class="card__title">Гора Эльбрус</h2>
                 <button
                   class="card__like button"
+                  type="button"
                   onclick="this.classList.toggle('card__like_active');"
                 ></button>
               </div>
@@ -78,6 +83,7 @@
               <div class="card__caption">
                 <h2 class="card__title">Домбай</h2>
                 <button
+                  type="button"
                   class="card__like button"
                   onclick="this.classList.toggle('card__like_active');"
                 ></button>
@@ -93,6 +99,7 @@
                 <h2 class="card__title">Карачаево-Черкесия</h2>
                 <button
                   class="card__like button"
+                  type="button"
                   onclick="this.classList.toggle('card__like_active');"
                 ></button>
               </div>
@@ -106,24 +113,26 @@
       </footer>
 
       <div class="modal">
-        <form class="modal__form">
+        <div class="modal__content">
           <button
             class="modal__close button"
             type="button"
             onclick="this.closest('.modal').classList.remove('modal_active')"
           ></button>
-          <h2 class="modal__title">Редактировать профиль</h2>
-          <fieldset class="modal__fieldset">
-            <input class="modal__field" type="text" name="name" placeholder="Жак-Ив Кусто" />
-            <input
-              class="modal__field"
-              type="text"
-              name="text"
-              placeholder="Исследователь океана"
-            />
-          </fieldset>
-          <button class="modal__button button" type="submit">Сохранить</button>
-        </form>
+          <form class="form">
+            <h2 class="form__title">Редактировать профиль</h2>
+            <fieldset class="form__group">
+              <input class="form__field" type="text" name="name" placeholder="Жак-Ив Кусто" />
+              <input
+                class="form__field"
+                type="text"
+                name="text"
+                placeholder="Исследователь океана"
+              />
+            </fieldset>
+            <button class="form__button button" type="submit">Сохранить</button>
+          </form>
+        </div>
       </div>
     </div>
   </body>

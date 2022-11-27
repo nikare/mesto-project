@@ -1,4 +1,4 @@
-.modal__field {
+.form__field {
   width: 100%;
   padding: 13px 0;
   border: none;
@@ -7,12 +7,12 @@
   box-sizing: border-box;
 }
 
-.modal__field::placeholder {
+.form__field::placeholder {
   font-size: 14px;
   line-height: 17px;
   color: black;
 }
 
-.modal__field:not(:last-of-type) {
+.form__field:not(:last-of-type) {
   margin-bottom: 5px;
 }

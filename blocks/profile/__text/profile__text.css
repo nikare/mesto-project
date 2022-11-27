@@ -1,7 +1,11 @@
 .profile__text {
+  max-width: 100%;
   font-size: 18px;
   line-height: 22px;
   margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 @media screen and (max-width: 576px) {

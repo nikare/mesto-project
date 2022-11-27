@@ -1,6 +1,6 @@
 .cards__item {
   width: calc((100% - 17px * 2) / 3);
-  margin-top: 3px;
+  margin-top: 2px;
 }
 
 @media screen and (max-width: 940px) {

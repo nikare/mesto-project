@@ -1,15 +1,8 @@
-.modal__form {
+.modal__content {
   position: relative;
   max-width: 430px;
   background: white;
-  padding: 34px 36px 37px;
   border-radius: 10px;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
   box-sizing: border-box;
-}
-
-@media screen and (max-width: 576px) {
-  .modal__form {
-    padding: 25px 22px;
-  }
 }
