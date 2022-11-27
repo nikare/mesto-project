@@ -5,3 +5,11 @@
   color: black;
   margin: 0 0 26px;
 }
+
+@media screen and (max-width: 576px) {
+  .modal__title {
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 47px;
+  }
+}

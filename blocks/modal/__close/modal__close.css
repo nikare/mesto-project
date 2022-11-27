@@ -5,8 +5,19 @@
   width: 32px;
   height: 32px;
   background-image: url('../../../images/icon-close.svg');
+  background-size: contain;
 }
 
 .modal__close:hover {
   opacity: 0.6;
+}
+
+@media screen and (max-width: 576px) {
+  .modal__close {
+    left: auto;
+    right: 0;
+    bottom: calc(100% + 16px);
+    width: 20px;
+    height: 20px;
+  }
 }
