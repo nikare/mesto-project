@@ -1,3 +1,3 @@
 .card__like_active {
-  background-image: url('../../../../images/icon-heart-black.svg');
+  background-size: 0, contain;
 }

@@ -1,8 +1,9 @@
 .card__like {
   width: 22px;
   height: 19px;
-  background: url('../../../images/icon-heart-white.svg') 50% no-repeat;
-  background-size: contain;
+  background-image: url('../../../images/icon-heart-white.svg'),
+    url('../../../images/icon-heart-black.svg');
+  background-size: contain, 0;
 }
 
 .card__like:hover {
