@@ -1,0 +1,10 @@
+.card__like {
+  width: 22px;
+  height: 19px;
+  background: url('../../../images/icon-heart-white.svg') 50% no-repeat;
+  background-size: contain;
+}
+
+.card__like:hover {
+  opacity: 0.5;
+}

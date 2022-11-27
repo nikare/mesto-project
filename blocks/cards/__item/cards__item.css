@@ -1,0 +1,4 @@
+.cards__item {
+  width: calc((100% - 17px * 2) / 3);
+  margin-top: 3px;
+}
