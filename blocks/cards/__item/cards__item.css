@@ -2,3 +2,15 @@
   width: calc((100% - 17px * 2) / 3);
   margin-top: 3px;
 }
+
+@media screen and (max-width: 940px) {
+  .cards__item {
+    width: calc((100% - 17px) / 2);
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .cards__item {
+    width: 100%;
+  }
+}

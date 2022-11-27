@@ -1,5 +1,22 @@
 .profile__info {
-  max-width: calc(100% - 120px - 45px - 150px);
+  max-width: calc(100% - 120px - 60px - 150px);
   margin: 0 15px 0 30px;
   flex-grow: 1;
+}
+
+@media screen and (max-width: 767px) {
+  .profile__info {
+    max-width: calc(100% - 120px - 30px);
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .profile__info {
+    width: 100%;
+    max-width: none;
+    text-align: center;
+    margin-top: 26px;
+    margin-left: 0;
+  }
 }

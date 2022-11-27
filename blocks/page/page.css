@@ -14,3 +14,15 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
 }
+
+@media screen and (max-width: 768px) {
+  .page {
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .page {
+    padding: 0 19px;
+  }
+}

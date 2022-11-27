@@ -4,3 +4,10 @@
   flex-wrap: wrap;
   margin: 40px 0 30px;
 }
+
+@media screen and (max-width: 576px) {
+  .profile {
+    flex-direction: column;
+    margin: 42px 0 19px;
+  }
+}
