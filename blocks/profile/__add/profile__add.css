@@ -1,0 +1,14 @@
+.profile__add {
+  width: 150px;
+  height: 50px;
+  background-image: url('../../../images/icon-plus.svg');
+  background-size: 22px 22px;
+  border: 2px solid white;
+  border-radius: 2px;
+  box-sizing: border-box;
+  margin-left: auto;
+}
+
+.profile__add:hover {
+  opacity: 0.6;
+}

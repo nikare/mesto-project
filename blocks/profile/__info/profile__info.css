@@ -1,0 +1,5 @@
+.profile__info {
+  max-width: calc(100% - 120px - 45px - 150px);
+  margin: 0 15px 0 30px;
+  flex-grow: 1;
+}

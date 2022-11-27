@@ -1,0 +1,14 @@
+.profile__edit {
+  position: relative;
+  top: 15px;
+  width: 24px;
+  height: 24px;
+  background-image: url('../../../images/icon-edit.svg');
+  background-size: 10px 10px;
+  border: 1px solid white;
+  margin-left: 18px;
+}
+
+.profile__edit:hover {
+  opacity: 0.6;
+}

@@ -1,0 +1,9 @@
+.profile__name-text {
+  max-width: calc(100% - 42px);
+  font-size: 42px;
+  line-height: 48px;
+  font-weight: 500;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

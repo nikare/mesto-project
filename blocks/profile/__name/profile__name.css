@@ -1,0 +1,5 @@
+.profile__name {
+  display: flex;
+  align-items: flex-start;
+  margin: 0 0 16px;
+}
