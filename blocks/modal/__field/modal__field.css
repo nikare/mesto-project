@@ -1,0 +1,18 @@
+.modal__field {
+  width: 100%;
+  padding: 13px 0;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  outline: 0;
+  box-sizing: border-box;
+}
+
+.modal__field::placeholder {
+  font-size: 14px;
+  line-height: 17px;
+  color: black;
+}
+
+.modal__field:not(:last-of-type) {
+  margin-bottom: 5px;
+}

@@ -21,7 +21,10 @@
           <div class="profile__info">
             <h1 class="profile__name">
               <span class="profile__name-text">Жак-Ив Кусто</span>
-              <button class="profile__edit button"></button>
+              <button
+                class="profile__edit button"
+                onclick="document.querySelector('.modal').classList.add('modal_active');"
+              ></button>
             </h1>
             <p class="profile__text">Исследователь океана</p>
           </div>
@@ -101,6 +104,27 @@
       <footer class="footer container">
         <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
       </footer>
+
+      <div class="modal">
+        <form class="modal__form">
+          <button
+            class="modal__close button"
+            type="button"
+            onclick="this.closest('.modal').classList.remove('modal_active')"
+          ></button>
+          <h2 class="modal__title">Редактировать профиль</h2>
+          <fieldset class="modal__fieldset">
+            <input class="modal__field" type="text" name="name" placeholder="Жак-Ив Кусто" />
+            <input
+              class="modal__field"
+              type="text"
+              name="text"
+              placeholder="Исследователь океана"
+            />
+          </fieldset>
+          <button class="modal__button button" type="submit">Сохранить</button>
+        </form>
+      </div>
     </div>
   </body>
 </html>

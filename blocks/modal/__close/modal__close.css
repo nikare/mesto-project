@@ -1,0 +1,12 @@
+.modal__close {
+  position: absolute;
+  left: calc(100% + 8px);
+  bottom: calc(100% + 8px);
+  width: 32px;
+  height: 32px;
+  background-image: url('../../../images/icon-close.svg');
+}
+
+.modal__close:hover {
+  opacity: 0.6;
+}
