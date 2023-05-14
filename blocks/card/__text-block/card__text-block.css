@@ -3,7 +3,6 @@
   align-items: center;
   justify-content: space-between;
   background: white;
-  padding-left: 21px;
-  padding-right: 30px;
+  padding: 25px 30px 25px 21px;
   flex-grow: 1;
 }

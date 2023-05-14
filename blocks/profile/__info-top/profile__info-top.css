@@ -1,3 +1,4 @@
 .profile__info-top {
-  position: relative;
+  display: flex;
+  align-items: baseline;
 }
