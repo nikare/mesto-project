@@ -9,8 +9,6 @@
   bottom: 0;
   right: 0;
   padding: 19px;
-  background: rgba(0, 0, 0, 0);
+  background: rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
-  visibility: hidden;
-  transition: background-color 0.3s linear;
 }
