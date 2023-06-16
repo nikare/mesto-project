@@ -63,6 +63,12 @@ function createCard(name, link) {
   return card;
 }
 
+function addCard() {
+  const { name, link } = document.forms['new-card'];
+  cards.unshift({ name: name.value, link: link.value });
+  renderCards();
+}
+
 function renderCards() {
   cardsListEl.innerHTML = '';
 
@@ -101,6 +107,10 @@ Array.from(document.forms).forEach((form) => {
 
     if (popupName === 'profile') {
       fillProfileContent();
+    }
+
+    if (popupName === 'new-card') {
+      addCard();
     }
 
     closePopup(popup);
