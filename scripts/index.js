@@ -53,12 +53,12 @@ renderCards();
 
 function createCard(name, link) {
   const card = cardTemplate.content.cloneNode(true);
-  const image = card.querySelector('.card__image');
-  const title = card.querySelector('.card__title');
+  const imageEl = card.querySelector('.card__image');
+  const titleEl = card.querySelector('.card__title');
 
-  image.src = link;
-  image.alt = name;
-  title.textContent = name;
+  imageEl.src = link;
+  imageEl.alt = name;
+  titleEl.textContent = name;
 
   return card;
 }
@@ -74,8 +74,19 @@ function renderCards() {
 
   cards.forEach(({ name, link }) => {
     const card = createCard(name, link);
+    addCardEvents(card);
     cardsListEl.append(card);
   });
+}
+
+function addCardEvents(card) {
+  const likeButtonEl = card.querySelector('.card__like-button');
+  likeButtonEl.addEventListener('click', likeCard);
+}
+
+function likeCard(event) {
+  const likeButtonEl = event.target;
+  likeButtonEl.classList.toggle('card__like-button_active');
 }
 
 // events

@@ -1,8 +1,10 @@
 .card__like-button {
   width: 22px;
   height: 19px;
-  background: url('../../../images/heart.svg') 50% no-repeat;
-  background-size: contain;
+  background-image: url('../../../images/heart-white.svg'), url('../../../images/heart-black.svg');
+  background-size: contain, 0;
+  background-position: 50%;
+  background-repeat: no-repeat;
   margin-left: 10px;
   flex-shrink: 0;
 }
