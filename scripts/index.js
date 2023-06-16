@@ -7,6 +7,7 @@ const profileDescriptionEl = document.querySelector('.profile__description');
 
 const cardsListEl = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('#card');
+const illustrationPopup = document.querySelector('.popup[data-popup="illustration"]');
 
 const cards = [
   {
@@ -80,11 +81,29 @@ function renderCards() {
 }
 
 function addCardEvents(card) {
+  const imageEl = card.querySelector('.card__image');
   const likeButtonEl = card.querySelector('.card__like-button');
   const removeButtonEl = card.querySelector('.card__remove-button');
 
+  imageEl.addEventListener('click', openCard);
   likeButtonEl.addEventListener('click', likeCard);
   removeButtonEl.addEventListener('click', removeCard);
+}
+
+function openCard(event) {
+  const imageEl = event.target;
+  const cardEl = imageEl.closest('.card');
+
+  const popupImage = illustrationPopup.querySelector('.popup__illustration-image');
+  const popupCaption = illustrationPopup.querySelector('.popup__illustration-caption');
+
+  const name = cardEl.querySelector('.card__title').textContent;
+
+  popupImage.src = imageEl.src;
+  popupImage.alt = name;
+  popupCaption.textContent = name;
+
+  openPopup(illustrationPopup);
 }
 
 function likeCard(event) {

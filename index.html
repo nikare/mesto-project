@@ -75,10 +75,20 @@
       </div>
     </div>
 
+    <div class="popup" data-popup="illustration">
+      <div class="popup__content">
+        <button type="button" class="popup__close-button button"></button>
+        <figure class="popup__illustration">
+          <img class="popup__illustration-image" src="" alt="" />
+          <figcaption class="popup__illustration-caption"></figcaption>
+        </figure>
+      </div>
+    </div>
+
     <!-- templates -->
     <template id="card">
       <li class="card">
-        <img class="card__image" src="" alt="" />
+        <img class="card__image" src="" alt="" data-popup="card-image" />
         <div class="card__text-block">
           <h2 class="card__title"></h2>
           <button type="button" class="card__like-button button"></button>

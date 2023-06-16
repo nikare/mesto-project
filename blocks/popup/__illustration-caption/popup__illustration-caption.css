@@ -1,0 +1,8 @@
+.popup__illustration-caption {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  font-size: 12px;
+  line-height: 15px;
+  margin-top: 10px;
+}
