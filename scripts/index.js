@@ -104,6 +104,7 @@ Array.from(document.forms).forEach((form) => {
     }
 
     closePopup(popup);
+    form.reset();
   });
 });
 

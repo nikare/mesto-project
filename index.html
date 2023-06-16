@@ -31,7 +31,11 @@
             </div>
             <p class="profile__description">Исследователь океана</p>
           </div>
-          <button type="button" class="profile__add-button button"></button>
+          <button
+            type="button"
+            class="profile__add-button button open-popup-button"
+            data-popup="new-card"
+          ></button>
         </section>
 
         <!-- cards -->
@@ -55,6 +59,18 @@
           <input type="text" class="form__field" name="name" placeholder="Жак-Ив Кусто" />
           <input type="text" class="form__field" name="desc" placeholder="Исследователь океана" />
           <button type="submit" class="form__button button">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup" data-popup="new-card">
+      <div class="popup__content">
+        <button type="button" class="popup__close-button button"></button>
+        <form class="form" name="new-card">
+          <h3 class="form__title">Новое место</h3>
+          <input type="text" class="form__field" name="name" placeholder="Название" />
+          <input type="text" class="form__field" name="desc" placeholder="Ссылка на картинку" />
+          <button type="submit" class="form__button button">Создать</button>
         </form>
       </div>
     </div>
