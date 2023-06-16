@@ -81,12 +81,24 @@ function renderCards() {
 
 function addCardEvents(card) {
   const likeButtonEl = card.querySelector('.card__like-button');
+  const removeButtonEl = card.querySelector('.card__remove-button');
+
   likeButtonEl.addEventListener('click', likeCard);
+  removeButtonEl.addEventListener('click', removeCard);
 }
 
 function likeCard(event) {
   const likeButtonEl = event.target;
   likeButtonEl.classList.toggle('card__like-button_active');
+}
+
+function removeCard(event) {
+  const cardEl = event.target.closest('.card');
+  const name = cardEl.querySelector('.card__title').textContent;
+  const link = cardEl.querySelector('.card__image').src;
+  const cardIndex = cards.findIndex((card) => card.name === name && card.link === link);
+  cards.splice(cardIndex, 1);
+  renderCards();
 }
 
 // events
