@@ -9,7 +9,10 @@ const cardsListEl = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('#card');
 const illustrationPopup = document.querySelector('.popup[data-popup="illustration"]');
 
-const cards = [
+const popupImage = document.querySelector('.popup__illustration-image');
+const popupCaption = document.querySelector('.popup__illustration-caption');
+
+const initialCards = [
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
@@ -50,7 +53,10 @@ function fillProfileContent() {
 }
 
 // cards
-renderCards();
+initialCards.forEach(({ name, link }) => {
+  const card = createCard(name, link);
+  cardsListEl.append(card);
+});
 
 function createCard(name, link) {
   const card = cardTemplate.content.cloneNode(true);
@@ -61,23 +67,14 @@ function createCard(name, link) {
   imageEl.alt = name;
   titleEl.textContent = name;
 
+  addCardEvents(card);
   return card;
 }
 
 function addCard() {
   const { name, link } = document.forms['new-card'];
-  cards.unshift({ name: name.value, link: link.value });
-  renderCards();
-}
-
-function renderCards() {
-  cardsListEl.innerHTML = '';
-
-  cards.forEach(({ name, link }) => {
-    const card = createCard(name, link);
-    addCardEvents(card);
-    cardsListEl.append(card);
-  });
+  const card = createCard(name.value, link.value);
+  cardsListEl.prepend(card);
 }
 
 function addCardEvents(card) {
@@ -113,11 +110,7 @@ function likeCard(event) {
 
 function removeCard(event) {
   const cardEl = event.target.closest('.card');
-  const name = cardEl.querySelector('.card__title').textContent;
-  const link = cardEl.querySelector('.card__image').src;
-  const cardIndex = cards.findIndex((card) => card.name === name && card.link === link);
-  cards.splice(cardIndex, 1);
-  renderCards();
+  cardEl.remove();
 }
 
 // events
