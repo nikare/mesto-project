@@ -90,10 +90,6 @@ function addCardEvents(card) {
 function openCard(event) {
   const imageEl = event.target;
   const cardEl = imageEl.closest('.card');
-
-  const popupImage = illustrationPopup.querySelector('.popup__illustration-image');
-  const popupCaption = illustrationPopup.querySelector('.popup__illustration-caption');
-
   const name = cardEl.querySelector('.card__title').textContent;
 
   popupImage.src = imageEl.src;
