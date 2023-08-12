@@ -1,5 +1,5 @@
 /* vendors */
-@import url('../vendor/normalize.css');
+@import url('normalize.css');
 
 /* fonts */
 @import url('../fonts/fonts.css');
