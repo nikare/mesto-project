@@ -1,12 +1,7 @@
 .form__field {
-  font-size: 14px;
-  line-height: 17px;
-  padding: 0 0 10px;
-  outline: 0;
-  border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 
 .form__field + .form__field {
-  margin-top: 30px;
+  margin-top: 35px;
 }

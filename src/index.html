@@ -54,10 +54,36 @@
     <div class="popup" data-popup="profile">
       <div class="popup__content">
         <button type="button" class="popup__close-button button"></button>
-        <form class="form" name="profile">
+        <form class="form" name="profile" novalidate>
           <h3 class="form__title">Редактировать профиль</h3>
-          <input type="text" class="form__field" name="name" placeholder="Жак-Ив Кусто" />
-          <input type="text" class="form__field" name="desc" placeholder="Исследователь океана" />
+          <label class="form__field">
+            <input
+              type="text"
+              class="form__input"
+              name="name"
+              placeholder="Жак-Ив Кусто"
+              minlength="2"
+              maxlength="40"
+              pattern="^[а-яА-ЯёЁa-zA-Z\-\s]+$"
+              data-error-pattern="Разрешены только латинские и кириллические буквы, знаки дефиса и пробелы"
+              required
+            />
+            <span class="form__input-error"></span>
+          </label>
+          <label class="form__field">
+            <input
+              type="text"
+              class="form__input"
+              name="desc"
+              placeholder="Исследователь океана"
+              minlength="2"
+              maxlength="200"
+              pattern="^[а-яА-ЯёЁa-zA-Z\-\s]+$"
+              data-error-pattern="Разрешены только латинские и кириллические буквы, знаки дефиса и пробелы"
+              required
+            />
+            <span class="form__input-error"></span>
+          </label>
           <button type="submit" class="form__button button">Сохранить</button>
         </form>
       </div>

@@ -1,5 +1,6 @@
 import { createCard, addCard, cardsListEl } from './card';
 import { openPopup, closePopup } from './modal';
+import { enableValidation } from './validate';
 import { initialCards } from './cards-data';
 
 // variables
@@ -7,6 +8,15 @@ const openPopupButtons = document.querySelectorAll('.open-popup-button');
 const closePopupButtons = document.querySelectorAll('.popup__close-button');
 const profileNameEl = document.querySelector('.profile__name');
 const profileDescriptionEl = document.querySelector('.profile__description');
+
+// forms
+enableValidation({
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__button',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input-error_active',
+});
 
 // cards
 initialCards.forEach(({ name, link }) => {
