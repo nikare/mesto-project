@@ -5,8 +5,14 @@ const instance = async (url, options) => {
     headers: { authorization: token },
     ...options,
   })
-    .then((response) => response.json())
-    .catch((error) => console.error(error));
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+
+      return Promise.reject(`Ошибка ${response.status}`);
+    })
+    .catch((error) => console.warn(error));
 };
 
 export const api = {
