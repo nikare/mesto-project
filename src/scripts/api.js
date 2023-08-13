@@ -29,4 +29,8 @@ export const api = {
       body: JSON.stringify(data),
     });
   },
+
+  async delete(url) {
+    return instance(url, { method: 'DELETE' });
+  },
 };

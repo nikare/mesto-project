@@ -12,15 +12,15 @@ const profileDescriptionEl = document.querySelector('.profile__description');
 const profileAvatarEl = document.querySelector('.profile__avatar');
 
 // fetch content
-api.get('users/me').then(({ avatar, name, about }) => {
+api.get('users/me').then(({ avatar, name, about, _id: myId }) => {
   profileAvatarEl.src = avatar;
   fillProfileContent(name, about);
-});
 
-api.get('cards').then((data) => {
-  data.forEach(({ name, link, likes }) => {
-    const card = createCard(name, link, likes.length);
-    cardsListEl.append(card);
+  api.get('cards').then((data) => {
+    data.forEach(({ name, link, likes, owner, _id: cardId }) => {
+      const card = createCard(name, link, likes.length, owner._id, myId, cardId);
+      cardsListEl.append(card);
+    });
   });
 });
 

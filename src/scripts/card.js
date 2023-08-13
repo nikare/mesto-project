@@ -1,4 +1,5 @@
 import { openPopup } from './modal';
+import { api } from './api';
 
 export const cardsListEl = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('#card');
@@ -6,18 +7,23 @@ const popupImage = document.querySelector('.popup__illustration-image');
 const popupCaption = document.querySelector('.popup__illustration-caption');
 const illustrationPopup = document.querySelector('.popup[data-popup="illustration"]');
 
-export function createCard(name, link, likesAmount) {
+export function createCard(name, link, likesAmount, ownerId, myId, cardId) {
   const card = cardTemplate.content.cloneNode(true);
   const imageEl = card.querySelector('.card__image');
   const titleEl = card.querySelector('.card__title');
   const likeAmountEl = card.querySelector('.card__like-amount');
+  const removeButton = card.querySelector('.card__remove-button');
+
+  if (ownerId !== myId) {
+    removeButton.remove();
+  }
 
   imageEl.src = link;
   imageEl.alt = name;
   titleEl.textContent = name;
   likeAmountEl.textContent = likesAmount;
 
-  addCardEvents(card);
+  addCardEvents(card, cardId);
   return card;
 }
 
@@ -26,14 +32,19 @@ export function addCard(name, link) {
   cardsListEl.prepend(card);
 }
 
-function addCardEvents(card) {
+function addCardEvents(card, cardId) {
   const imageEl = card.querySelector('.card__image');
   const likeButtonEl = card.querySelector('.card__like-button');
   const removeButtonEl = card.querySelector('.card__remove-button');
 
   imageEl.addEventListener('click', openCard);
   likeButtonEl.addEventListener('click', likeCard);
-  removeButtonEl.addEventListener('click', removeCard);
+
+  if (removeButtonEl) {
+    removeButtonEl.addEventListener('click', ({ target }) => {
+      removeCard(target, cardId);
+    });
+  }
 }
 
 function openCard(event) {
@@ -53,7 +64,10 @@ function likeCard(event) {
   likeButtonEl.classList.toggle('card__like-button_active');
 }
 
-function removeCard(event) {
-  const cardEl = event.target.closest('.card');
-  cardEl.remove();
+function removeCard(buttonElement, cardId) {
+  const cardEl = buttonElement.closest('.card');
+
+  api.delete(`cards/${cardId}`).then(() => {
+    cardEl.remove();
+  });
 }
