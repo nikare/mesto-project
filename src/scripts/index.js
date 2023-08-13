@@ -71,7 +71,7 @@ Array.from(document.forms).forEach((form) => {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     const submitButtonElement = form.querySelector('.form__button[type="submit"]');
-    disableButton(submitButtonElement);
+    disableButton(submitButtonElement, true, true);
 
     const popupName = form.getAttribute('name');
     const popup = form.closest('.popup');
@@ -82,7 +82,7 @@ Array.from(document.forms).forEach((form) => {
 
       api.patch('users/me', { name, about }).then(() => {
         fillProfileContent(name, about);
-        afterSubmitForm(form, popup);
+        afterSubmitForm(form, popup, submitButtonElement);
       });
     } else if (popupName === 'new-card') {
       const name = document.forms['new-card'].name.value;
@@ -90,17 +90,17 @@ Array.from(document.forms).forEach((form) => {
 
       api.post('cards', { name, link }).then(() => {
         addCard(name, link);
-        afterSubmitForm(form, popup);
+        afterSubmitForm(form, popup, submitButtonElement);
       });
     } else if (popupName === 'avatar') {
       const link = document.forms.avatar.link.value;
 
       api.patch('users/me/avatar', { avatar: link }).then(() => {
         profileAvatarImageEl.src = link;
-        afterSubmitForm(form, popup);
+        afterSubmitForm(form, popup, submitButtonElement);
       });
     } else {
-      afterSubmitForm(form, popup);
+      afterSubmitForm(form, popup, submitButtonElement);
     }
   });
 });
