@@ -76,9 +76,7 @@ const showInputError = (inputElement, inputErrorClass, errorClass, errorMessage)
 };
 
 const hideInputError = (inputElement, inputErrorClass, errorClass) => {
-  // console.log({ inputElement, inputErrorClass, errorClass });
   const errorElement = inputElement.nextElementSibling;
-  console.log(errorElement, inputErrorClass);
   inputElement.classList.remove(inputErrorClass);
   errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
