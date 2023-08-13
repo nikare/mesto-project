@@ -1,3 +1,5 @@
+import { disableButton } from './utils';
+
 export function enableValidation({
   formSelector,
   inputSelector,
@@ -42,9 +44,9 @@ const setEventListeners = (
 
 function toggleButtonState(inputList, buttonElement) {
   if (hasInvalidInput(inputList)) {
-    buttonElement.disabled = true;
+    disableButton(buttonElement);
   } else {
-    buttonElement.disabled = false;
+    disableButton(buttonElement, false);
   }
 }
 

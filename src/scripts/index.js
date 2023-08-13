@@ -2,6 +2,7 @@ import { createCard, addCard, cardsListEl } from './card';
 import { openPopup, closePopup } from './modal';
 import { enableValidation } from './validate';
 import { initialCards } from './cards-data';
+import { disableButton } from './utils';
 
 // variables
 const openPopupButtons = document.querySelectorAll('.open-popup-button');
@@ -61,6 +62,8 @@ closePopupButtons.forEach((button) => {
 Array.from(document.forms).forEach((form) => {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
+    disableButton(form.querySelector('.form__button[type="submit"]'));
+
     const popupName = form.getAttribute('name');
     const popup = form.closest('.popup');
 
