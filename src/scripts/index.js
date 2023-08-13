@@ -12,12 +12,12 @@ const profileDescriptionEl = document.querySelector('.profile__description');
 const profileAvatarEl = document.querySelector('.profile__avatar');
 
 // fetch content
-api('users/me').then(({ avatar, name, about }) => {
+api.get('users/me').then(({ avatar, name, about }) => {
   profileAvatarEl.src = avatar;
   fillProfileContent(name, about);
 });
 
-api('cards').then((data) => {
+api.get('cards').then((data) => {
   data.forEach(({ name, link }) => {
     const card = createCard(name, link);
     cardsListEl.append(card);
@@ -34,15 +34,15 @@ enableValidation({
 });
 
 // profile
-function fillProfileContent(name, desc) {
+function fillProfileContent(name, about) {
   profileNameEl.textContent = name;
-  profileDescriptionEl.textContent = desc;
+  profileDescriptionEl.textContent = about;
 }
 
 export function fillProfilePopup() {
-  const { name, desc } = document.forms.profile.elements;
+  const { name, about } = document.forms.profile.elements;
   name.value = profileNameEl.textContent;
-  desc.value = profileDescriptionEl.textContent;
+  about.value = profileDescriptionEl.textContent;
 }
 
 // events
@@ -75,15 +75,26 @@ Array.from(document.forms).forEach((form) => {
     const popup = form.closest('.popup');
 
     if (popupName === 'profile') {
-      const { name, desc } = form.elements;
-      fillProfileContent(name.value, desc.value);
-    }
+      const name = form.elements.name.value;
+      const about = form.elements.about.value;
 
-    if (popupName === 'new-card') {
-      addCard();
-    }
+      api.patch('users/me', { name, about }).then(() => {
+        fillProfileContent(name, about);
+        closePopup(popup);
+        form.reset();
+      });
+    } else if (popupName === 'new-card') {
+      const name = document.forms['new-card'].name.value;
+      const link = document.forms['new-card'].link.value;
 
-    closePopup(popup);
-    form.reset();
+      api.post('cards', { name, link }).then(() => {
+        addCard(name, link);
+        closePopup(popup);
+        form.reset();
+      });
+    } else {
+      closePopup(popup);
+      form.reset();
+    }
   });
 });

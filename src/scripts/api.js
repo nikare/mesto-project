@@ -1,8 +1,32 @@
-export async function api(url, method = 'GET') {
+const token = '62c4f3cc-13e3-43aa-8c7b-1efac6a855f6';
+
+const instance = async (url, options) => {
   return fetch(`https://nomoreparties.co/v1/plus-cohort-27/${url}`, {
-    method: method,
-    headers: { authorization: '62c4f3cc-13e3-43aa-8c7b-1efac6a855f6' },
+    headers: { authorization: token },
+    ...options,
   })
     .then((response) => response.json())
     .catch((error) => console.error(error));
-}
+};
+
+export const api = {
+  async get(url) {
+    return instance(url);
+  },
+
+  async patch(url, data) {
+    return instance(url, {
+      headers: { authorization: token, 'Content-Type': 'application/json' },
+      method: 'PATCH',
+      body: JSON.stringify(data),
+    });
+  },
+
+  async post(url, data) {
+    return instance(url, {
+      headers: { authorization: token, 'Content-Type': 'application/json' },
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+};

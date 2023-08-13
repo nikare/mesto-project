@@ -19,9 +19,8 @@ export function createCard(name, link) {
   return card;
 }
 
-export function addCard() {
-  const { name, link } = document.forms['new-card'];
-  const card = createCard(name.value, link.value);
+export function addCard(name, link) {
+  const card = createCard(name, link);
   cardsListEl.prepend(card);
 }
 
