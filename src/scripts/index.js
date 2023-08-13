@@ -3,12 +3,20 @@ import { openPopup, closePopup } from './modal';
 import { enableValidation } from './validate';
 import { initialCards } from './cards-data';
 import { disableButton } from './utils';
+import { api } from './api';
 
 // variables
 const openPopupButtons = document.querySelectorAll('.open-popup-button');
 const closePopupButtons = document.querySelectorAll('.popup__close-button');
 const profileNameEl = document.querySelector('.profile__name');
 const profileDescriptionEl = document.querySelector('.profile__description');
+const profileAvatarEl = document.querySelector('.profile__avatar');
+
+// fetch content
+api('users/me').then((data) => {
+  profileAvatarEl.src = data.avatar;
+  fillProfileContent(data.name, data.about);
+});
 
 // forms
 enableValidation({
@@ -26,14 +34,13 @@ initialCards.forEach(({ name, link }) => {
 });
 
 // profile
-function fillProfileContent() {
-  const { name, desc } = document.forms.profile;
-  profileNameEl.textContent = name.value;
-  profileDescriptionEl.textContent = desc.value;
+function fillProfileContent(name, desc) {
+  profileNameEl.textContent = name;
+  profileDescriptionEl.textContent = desc;
 }
 
 export function fillProfilePopup() {
-  const { name, desc } = document.forms.profile;
+  const { name, desc } = document.forms.profile.elements;
   name.value = profileNameEl.textContent;
   desc.value = profileDescriptionEl.textContent;
 }
@@ -68,7 +75,8 @@ Array.from(document.forms).forEach((form) => {
     const popup = form.closest('.popup');
 
     if (popupName === 'profile') {
-      fillProfileContent();
+      const { name, desc } = form.elements;
+      fillProfileContent(name.value, desc.value);
     }
 
     if (popupName === 'new-card') {
