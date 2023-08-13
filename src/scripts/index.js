@@ -18,8 +18,8 @@ api.get('users/me').then(({ avatar, name, about }) => {
 });
 
 api.get('cards').then((data) => {
-  data.forEach(({ name, link }) => {
-    const card = createCard(name, link);
+  data.forEach(({ name, link, likes }) => {
+    const card = createCard(name, link, likes.length);
     cardsListEl.append(card);
   });
 });

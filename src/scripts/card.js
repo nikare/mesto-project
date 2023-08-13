@@ -6,14 +6,16 @@ const popupImage = document.querySelector('.popup__illustration-image');
 const popupCaption = document.querySelector('.popup__illustration-caption');
 const illustrationPopup = document.querySelector('.popup[data-popup="illustration"]');
 
-export function createCard(name, link) {
+export function createCard(name, link, likesAmount) {
   const card = cardTemplate.content.cloneNode(true);
   const imageEl = card.querySelector('.card__image');
   const titleEl = card.querySelector('.card__title');
+  const likeAmountEl = card.querySelector('.card__like-amount');
 
   imageEl.src = link;
   imageEl.alt = name;
   titleEl.textContent = name;
+  likeAmountEl.textContent = likesAmount;
 
   addCardEvents(card);
   return card;
