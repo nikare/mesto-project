@@ -1,7 +1,7 @@
 import { createCard, addCard, cardsListEl } from './card';
+import { disableButton, afterSubmitForm } from './utils';
 import { openPopup, closePopup } from './modal';
 import { enableValidation } from './validate';
-import { disableButton } from './utils';
 import { api } from './api';
 
 // variables
@@ -9,11 +9,11 @@ const openPopupButtons = document.querySelectorAll('.open-popup-button');
 const closePopupButtons = document.querySelectorAll('.popup__close-button');
 const profileNameEl = document.querySelector('.profile__name');
 const profileDescriptionEl = document.querySelector('.profile__description');
-const profileAvatarEl = document.querySelector('.profile__avatar');
+const profileAvatarImageEl = document.querySelector('.profile__avatar-image');
 
 // fetch content
 api.get('users/me').then(({ avatar, name, about, _id: myId }) => {
-  profileAvatarEl.src = avatar;
+  profileAvatarImageEl.src = avatar;
   fillProfileContent(name, about);
 
   api.get('cards').then((data) => {
@@ -70,7 +70,8 @@ closePopupButtons.forEach((button) => {
 Array.from(document.forms).forEach((form) => {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    disableButton(form.querySelector('.form__button[type="submit"]'));
+    const submitButtonElement = form.querySelector('.form__button[type="submit"]');
+    disableButton(submitButtonElement);
 
     const popupName = form.getAttribute('name');
     const popup = form.closest('.popup');
@@ -81,8 +82,7 @@ Array.from(document.forms).forEach((form) => {
 
       api.patch('users/me', { name, about }).then(() => {
         fillProfileContent(name, about);
-        closePopup(popup);
-        form.reset();
+        afterSubmitForm(form, popup);
       });
     } else if (popupName === 'new-card') {
       const name = document.forms['new-card'].name.value;
@@ -90,12 +90,17 @@ Array.from(document.forms).forEach((form) => {
 
       api.post('cards', { name, link }).then(() => {
         addCard(name, link);
-        closePopup(popup);
-        form.reset();
+        afterSubmitForm(form, popup);
+      });
+    } else if (popupName === 'avatar') {
+      const link = document.forms.avatar.link.value;
+
+      api.patch('users/me/avatar', { avatar: link }).then(() => {
+        profileAvatarImageEl.src = link;
+        afterSubmitForm(form, popup);
       });
     } else {
-      closePopup(popup);
-      form.reset();
+      afterSubmitForm(form, popup);
     }
   });
 });
