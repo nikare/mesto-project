@@ -18,7 +18,8 @@ api.get('users/me').then(({ avatar, name, about, _id: myId }) => {
 
   api.get('cards').then((data) => {
     data.forEach(({ name, link, likes, owner, _id: cardId }) => {
-      const card = createCard(name, link, likes.length, owner._id, myId, cardId);
+      const isLiked = Boolean(likes.find(({ _id }) => _id === myId));
+      const card = createCard(name, link, likes.length, owner._id, myId, cardId, isLiked);
       cardsListEl.append(card);
     });
   });

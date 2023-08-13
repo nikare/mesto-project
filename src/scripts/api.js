@@ -33,4 +33,8 @@ export const api = {
   async delete(url) {
     return instance(url, { method: 'DELETE' });
   },
+
+  async put(url) {
+    return instance(url, { method: 'PUT' });
+  },
 };
