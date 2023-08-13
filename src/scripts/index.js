@@ -1,7 +1,6 @@
 import { createCard, addCard, cardsListEl } from './card';
 import { openPopup, closePopup } from './modal';
 import { enableValidation } from './validate';
-import { initialCards } from './cards-data';
 import { disableButton } from './utils';
 import { api } from './api';
 
@@ -13,9 +12,16 @@ const profileDescriptionEl = document.querySelector('.profile__description');
 const profileAvatarEl = document.querySelector('.profile__avatar');
 
 // fetch content
-api('users/me').then((data) => {
-  profileAvatarEl.src = data.avatar;
-  fillProfileContent(data.name, data.about);
+api('users/me').then(({ avatar, name, about }) => {
+  profileAvatarEl.src = avatar;
+  fillProfileContent(name, about);
+});
+
+api('cards').then((data) => {
+  data.forEach(({ name, link }) => {
+    const card = createCard(name, link);
+    cardsListEl.append(card);
+  });
 });
 
 // forms
@@ -25,12 +31,6 @@ enableValidation({
   submitButtonSelector: '.form__button',
   inputErrorClass: 'form__input_type_error',
   errorClass: 'form__input-error_active',
-});
-
-// cards
-initialCards.forEach(({ name, link }) => {
-  const card = createCard(name, link);
-  cardsListEl.append(card);
 });
 
 // profile
