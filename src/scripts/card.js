@@ -1,6 +1,6 @@
 import { openPopup } from './modal';
 import { disableButton } from './utils';
-import { api } from './api';
+import { api, userId } from './api';
 
 export const cardsListEl = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('#card');
@@ -8,7 +8,7 @@ const popupImage = document.querySelector('.popup__illustration-image');
 const popupCaption = document.querySelector('.popup__illustration-caption');
 const illustrationPopup = document.querySelector('.popup[data-popup="illustration"]');
 
-export function createCard(name, link, likesAmount, ownerId, myId, cardId, isLiked) {
+export function createCard(name, link, likes, ownerId, cardId) {
   const card = cardTemplate.content.cloneNode(true);
   const imageEl = card.querySelector('.card__image');
   const titleEl = card.querySelector('.card__title');
@@ -16,26 +16,23 @@ export function createCard(name, link, likesAmount, ownerId, myId, cardId, isLik
   const likeAmountEl = card.querySelector('.card__like-amount');
   const removeButton = card.querySelector('.card__remove-button');
 
+  const isLiked = Boolean(likes.find(({ _id }) => _id === userId));
+
   if (isLiked) {
     likeButton.classList.add('card__like-button_active');
   }
 
-  if (ownerId !== myId) {
+  if (ownerId !== userId) {
     removeButton.remove();
   }
 
   imageEl.src = link;
   imageEl.alt = name;
   titleEl.textContent = name;
-  likeAmountEl.textContent = likesAmount;
+  likeAmountEl.textContent = likes.length;
 
   addCardEvents(card, cardId);
   return card;
-}
-
-export function addCard(name, link) {
-  const card = createCard(name, link);
-  cardsListEl.prepend(card);
 }
 
 function addCardEvents(card, cardId) {
@@ -74,17 +71,23 @@ function likeCard(buttonElement, cardId) {
   disableButton(buttonElement);
 
   if (isLiked) {
-    api.delete(`cards/likes/${cardId}`).then(({ likes }) => {
-      buttonElement.classList.remove('card__like-button_active');
-      likesAmountEl.textContent = likes.length;
-      disableButton(buttonElement, false);
-    });
+    api
+      .delete(`cards/likes/${cardId}`)
+      .then(({ likes }) => {
+        buttonElement.classList.remove('card__like-button_active');
+        likesAmountEl.textContent = likes.length;
+        disableButton(buttonElement, false);
+      })
+      .catch((error) => console.warn(error));
   } else {
-    api.put(`cards/likes/${cardId}`).then(({ likes }) => {
-      buttonElement.classList.add('card__like-button_active');
-      likesAmountEl.textContent = likes.length;
-      disableButton(buttonElement, false);
-    });
+    api
+      .put(`cards/likes/${cardId}`)
+      .then(({ likes }) => {
+        buttonElement.classList.add('card__like-button_active');
+        likesAmountEl.textContent = likes.length;
+        disableButton(buttonElement, false);
+      })
+      .catch((error) => console.warn(error));
   }
 }
 
@@ -92,8 +95,11 @@ function removeCard(buttonElement, cardId) {
   disableButton(buttonElement);
   const cardEl = buttonElement.closest('.card');
 
-  api.delete(`cards/${cardId}`).then(() => {
-    cardEl.remove();
-    disableButton(buttonElement, false);
-  });
+  api
+    .delete(`cards/${cardId}`)
+    .then(() => {
+      cardEl.remove();
+      disableButton(buttonElement, false);
+    })
+    .catch((error) => console.warn(error));
 }

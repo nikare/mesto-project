@@ -1,4 +1,4 @@
-import { createCard, addCard, cardsListEl } from './card';
+import { createCard, cardsListEl } from './card';
 import { disableButton, afterSubmitForm } from './utils';
 import { openPopup, closePopup } from './modal';
 import { enableValidation } from './validate';
@@ -12,18 +12,23 @@ const profileDescriptionEl = document.querySelector('.profile__description');
 const profileAvatarImageEl = document.querySelector('.profile__avatar-image');
 
 // fetch content
-api.get('users/me').then(({ avatar, name, about, _id: myId }) => {
-  profileAvatarImageEl.src = avatar;
-  fillProfileContent(name, about);
+api
+  .get('users/me')
+  .then(({ avatar, name, about }) => {
+    profileAvatarImageEl.src = avatar;
+    fillProfileContent(name, about);
+  })
+  .catch((error) => console.warn(error));
 
-  api.get('cards').then((data) => {
+api
+  .get('cards')
+  .then((data) => {
     data.forEach(({ name, link, likes, owner, _id: cardId }) => {
-      const isLiked = Boolean(likes.find(({ _id }) => _id === myId));
-      const card = createCard(name, link, likes.length, owner._id, myId, cardId, isLiked);
-      cardsListEl.append(card);
+      const cardElement = createCard(name, link, likes, owner._id, cardId);
+      cardsListEl.append(cardElement);
     });
-  });
-});
+  })
+  .catch((error) => console.warn(error));
 
 // forms
 enableValidation({
@@ -80,25 +85,41 @@ Array.from(document.forms).forEach((form) => {
       const name = form.elements.name.value;
       const about = form.elements.about.value;
 
-      api.patch('users/me', { name, about }).then(() => {
-        fillProfileContent(name, about);
-        afterSubmitForm(form, popup, submitButtonElement);
-      });
+      api
+        .patch('users/me', { name, about })
+        .then(() => {
+          fillProfileContent(name, about);
+        })
+        .catch((error) => console.warn(error))
+        .finally(() => {
+          afterSubmitForm(form, popup, submitButtonElement);
+        });
     } else if (popupName === 'new-card') {
       const name = document.forms['new-card'].name.value;
       const link = document.forms['new-card'].link.value;
 
-      api.post('cards', { name, link }).then(() => {
-        addCard(name, link);
-        afterSubmitForm(form, popup, submitButtonElement);
-      });
+      api
+        .post('cards', { name, link })
+        .then(({ name, link, likes, owner, _id: cardId }) => {
+          const cardElement = createCard(name, link, likes, owner._id, cardId);
+          cardsListEl.prepend(cardElement);
+        })
+        .catch((error) => console.warn(error))
+        .finally(() => {
+          afterSubmitForm(form, popup, submitButtonElement);
+        });
     } else if (popupName === 'avatar') {
       const link = document.forms.avatar.link.value;
 
-      api.patch('users/me/avatar', { avatar: link }).then(() => {
-        profileAvatarImageEl.src = link;
-        afterSubmitForm(form, popup, submitButtonElement);
-      });
+      api
+        .patch('users/me/avatar', { avatar: link })
+        .then(() => {
+          profileAvatarImageEl.src = link;
+        })
+        .catch((error) => console.warn(error))
+        .finally(() => {
+          afterSubmitForm(form, popup, submitButtonElement);
+        });
     } else {
       afterSubmitForm(form, popup, submitButtonElement);
     }
